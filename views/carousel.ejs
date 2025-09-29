@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Carousel</title>
+    <%- include("partials/headerFiles") %>
+
+
+</head>
+<body id="carousel-body">
+    <%- include("partials/navBar") %>
+    <h1 class="text-center mt-3 mb-0">My Gallery</h1>
+    
+    <button id="deleteBtn" class="btn btn-danger position-absolute" style="top: 16%; right: 10px; transform: translateY(-50%);">
+        <div id="deleteLoader" class="trashcan-animation"></div>
+    </button>
+    <div class="slider sliderCarousel">
+        <div class="inner-slider">
+            <div class="item">
+            </div>
+        </div>
+        
+        <button id="prevCarousel" class="carousel-nav-btn">
+            <span class="arrow">&larr;</span>
+        </button>
+        <button id="nextCarousel" class="carousel-nav-btn">
+            <span class="arrow">&rarr;</span>
+        </button>
+        
+        
+    </div>
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+          <div class="modal-content">
+            <div class="modal-header border-0 d-flex justify-content-center">
+              <h5 class="modal-title text-center w-100" id="imageModalLabel">Full Size Image</h5>
+              <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+              <img id="fullSizeImage" src="" alt="Full Size" class="img-fluid" style="max-width: 100%;">
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <%- include("partials/footer") %>
+    <%- include("partials/codeFiles") %>
+    
+    
+</body>
+</html>

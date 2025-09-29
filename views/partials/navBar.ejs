@@ -1,0 +1,65 @@
+<header style="padding: 0px !important; background-color: rgba(0, 51, 204, 0.7) !important; position: sticky !important; top: 0px !important; z-index: 1200 !important;">
+  <div class="container-fluid" style= "padding: 0px !important; font-weight: 300 !important; backdrop-filter: blur(10px);">
+    <div class="d-flex flex-wrap align-items-center justify-content-space-evenly" id="navContainer">
+      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <!-- <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg> -->
+         <img src="/images/Hanover Design.png" alt="" style="width: 120px; height: 40px;"/>
+      </a>
+
+      <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0" id="navLinks">
+        <!-- <li><a href="/" class="nav-link px-2 text-white">Home</a></li> -->
+         <!-- <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li> -->
+
+
+        <!-- <li><a href="/prompt" id="promptLink" class="nav-link px-2 text-white">Create</a></li>
+        <li><a href="/gallery" id="galleryLink" class="nav-link px-2 text-white">Gallery</a></li>
+        <li><a href="/inpaint" id="inpaintLink" class="nav-link px-2 text-white">Inpaint</a></li>
+        <li><a href="/sketch" id="sketchLink" class="nav-link px-2 text-white">Sketch</a></li>
+        <li><a href="/enhance" id="enhanceLink" class="nav-link px-2 text-white">Enhance</a></li>
+        <li><a href="/settings" id="settingsLink" class="nav-link px-2 text-white">Settings</a></li>
+        <li><a href="/about" id="aboutLink" class="nav-link px-2 text-white">About</a></li> -->
+
+        <li><a href="/prompt" id="promptLink" class="nav-link px-2 text-white <%= page === 'prompt' ? 'selected-link' : '' %>">Create</a></li>
+        <li><a href="/inpaint" id="inpaintLink" class="nav-link px-2 text-white <%= page === 'inpaint' ? 'selected-link' : '' %>">Inpaint</a></li>
+        <li><a href="/sketch" id="sketchLink" class="nav-link px-2 text-white <%= page === 'sketch' ? 'selected-link' : '' %>">Sketch</a></li>
+        <li><a href="/enhance" id="enhanceLink" class="nav-link px-2 text-white <%= page === 'enhance' ? 'selected-link' : '' %>">Enhance</a></li>
+        <li><a href="/gallery" id="galleryLink" class="nav-link px-2 text-white <%= page === 'gallery' ? 'selected-link' : '' %>">Gallery</a></li>
+        <li><a href="/settings" id="settingsLink" class="nav-link px-2 text-white <%= page === 'settings' ? 'selected-link' : '' %>">Settings</a></li>
+        <li><a href="/about" id="aboutLink" class="nav-link px-2 text-white <%= page === 'about' ? 'selected-link' : '' %>">About</a></li>
+        
+      </ul>
+
+
+      <div class="text-end">
+        <% if (user) { %> 
+          
+
+          <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" 
+               id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="<%= user.picture || '/images/8742495.png' %>" alt="Profile" 
+                   style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+              <span><%= user.name %></span>
+            </a>
+            
+            <ul id="logoutBtn" class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="profileDropdown">
+              <li>
+                <a id="logoutBtnU" class="dropdown-item text-danger logout-btn d-flex align-items-center justify-content-center" href="/logout">
+                  <img src="/images/logout.svg" alt="Logout" width="16" height="16" style="filter: invert(18%) sepia(93%) saturate(7495%) hue-rotate(360deg) brightness(96%) contrast(107%); stroke-width: 20px;">
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          
+        <% } else { %>
+
+          <button type="button" class="btn btn-outline-light me-2" id="loginBtn">Login</button>
+          <button type="button" class="btn btn-warning" id="signupBtn">Sign-up</button>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</header>
+
+

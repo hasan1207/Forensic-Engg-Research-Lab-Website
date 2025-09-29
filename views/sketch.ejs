@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sketch Interior Design</title>
+  <%- include("partials/headerFiles") %>
+</head>
+<body class="bg-light">
+  <%- include("partials/navBar") %>
+  <div class="container py-4">
+    <h1 class="text-center mb-4">Sketch Interior Design</h1>
+
+    <!-- <button class="btn btn-secondary position-absolute" style="top: 100px; right: 20px; z-index: 1100;" 
+    type="button" data-bs-toggle="offcanvas" data-bs-target="#galleryOffcanvas" aria-controls="galleryOffcanvas" id="openGalleryBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        <circle cx="9" cy="9" r="2"></circle>
+        <path d="M21 15l-5-5L5 21"></path>
+      </svg>
+      Open Gallery
+    </button> -->
+
+    <!-- Mode Selection: Sketch or Upload -->
+    <div class="text-center my-4">
+      <label class="form-check-label me-3">Choose Input Method:</label>
+      <input type="radio" name="inputMode" id="uploadMode" class="form-check-input" checked>
+      <label for="uploadMode" class="me-3">Upload Image</label>
+
+      <input type="radio" name="inputMode" id="sketchMode" class="form-check-input">
+      <label for="sketchMode">Sketch on Canvas</label>
+    </div>
+
+    <!-- Aspect Ratio & Canvas Size Selection -->
+    <div class="row align-items-center" id="aspectRatioAndDimensionsRow"> <!-- Added align-items-center -->
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="aspectRatio" class="form-label">Select Aspect Ratio:</label>
+                <select class="form-select" id="aspectRatio" name="aspectRatio" required>
+                    <option value="4:3">4:3</option>
+                    <option value="3:2">3:2</option>
+                    <option value="1:1">1:1</option>
+                    <option value="16:9">16:9</option>
+                    <option value="16:10">16:10</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <!-- Removed mt-2 from label -->
+                <label for="dimensions" class="form-label">Select Canvas Size:</label>
+                <select class="form-select" id="dimensions" name="dimensions" required></select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Input (Default) -->
+    <div class="mb-3 text-center" id="uploadSection">
+      <input type="file" id="imageUpload" accept="image/*" class="form-control w-50 mx-auto">
+    </div>
+
+    <%- include("partials/modelStatus") %>
+
+    <div class="img-con">
+        <div id="imageContainer" class="blank-image-container">
+          <img id="blankImg" src="/images/landscape.webp" alt="Blank Image">
+          
+        </div>
+      </div>
+
+
+    <div class="text-center mt-3 toggle-mode-container">
+        <button id="toggleMode" class="btn btn-outline-primary">Switch to Eraser</button>
+        <button id="clearCanvas" class="btn btn-outline-danger ms-2">Clear Canvas</button>
+    </div>
+
+    <!-- Sketch Canvas (Hidden by Default) -->
+    <div class="d-flex justify-content-center my-4 sketch-canvas-container">
+        <canvas id="sketchCanvas" width="512" height="384"></canvas>
+        
+      </div>
+
+    <div class="control-section">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="prompt" class="form-label">Prompt:</label>
+          <input type="text" id="prompt" class="form-control" placeholder="Enter prompt text">
+        </div>
+      </div>
+    </div>
+
+    <section id="imageContainer" class="mt-5 mb-5 text-center position-relative">
+        <h4 class="mb-4">Your Generated Design</h4>
+        <p class="text-muted" id="loadingMessage">The generated image will appear here after processing.</p>
+
+        <div class="img-con">
+          <div id="imageContainer" class="canvas-image-container">
+            <img id="generatedImg" class="gen-img" src="/images/checkers.jpg" alt="Uploaded Image">
+            
+            
+            
+            <%- include("partials/progressRing") %>
+            <%- include("partials/saveIcon") %>
+          </div>
+        </div>
+    
+        <div id="controls" class="d-flex justify-content-center gap-3">
+          <button id="designBtn" class="btn btn-primary">Design</button>
+        </div>
+      </div>
+    </section>
+
+    
+
+  <!-- <div class="offcanvas offcanvas-end" tabindex="-1" id="galleryOffcanvas" aria-labelledby="galleryOffcanvasLabel" style="z-index: 1101;">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="galleryOffcanvasLabel">Select an Image</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div id="galleryThumbnails" class="d-flex flex-wrap gap-3"></div>
+    </div>
+  </div> -->
+
+  <%- include("partials/footer") %>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+  <%- include("partials/codeFiles") %>
+
+  <!-- <script>
+
+    const saveLoader = lottie.loadAnimation({
+        container: document.getElementById("saveLoader"),
+        renderer: "svg",
+        loop: true,
+        autoplay: false,
+        path: "./images/save.json",
+    
+    });
+
+    let generatedImage = "";
+    let imgPrompt = "";
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        let globalWidth = 768;
+        let globalHeight = 576;
+        
+
+      const uploadMode = document.getElementById("uploadMode");
+      const sketchMode = document.getElementById("sketchMode");
+      const uploadSection = document.getElementById("uploadSection");
+      const sketchCanvas = document.getElementById("sketchCanvas");
+      const aspectRatioAndDimensionsRow = document.getElementById("aspectRatioAndDimensionsRow");
+      const aspectRatioSelect = document.getElementById("aspectRatio");
+      const dimensionsSelect = document.getElementById("dimensions");
+      //const ctx = sketchCanvas.getContext("2d");
+      const designBtn = document.getElementById("designBtn");
+      const uploadedImage = document.getElementById("generatedImg");
+
+      //const toggleModeButton = document.getElementById("toggleMode");
+      const toggleModeContainer = document.querySelector(".toggle-mode-container");
+      const clearCanvasButton = document.getElementById("clearCanvas");
+      const blankImg = document.getElementById("blankImg");
+      const imageUpload = document.getElementById("imageUpload");
+      const promptInput = document.getElementById("promptInput");
+
+
+
+    let isEraserMode = false;
+    // Sketching functionality
+    let drawing = false;
+
+
+    const ctx = sketchCanvas.getContext("2d");
+    const toggleModeButton = document.getElementById("toggleMode");
+
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "black"; // Default to black pen
+
+    clearCanvasButton.addEventListener("click", () => {
+        ctx.clearRect(0, 0, sketchCanvas.width, sketchCanvas.height); // Clear everything
+        ctx.fillStyle = "white"; // Reset background to white
+        ctx.fillRect(0, 0, sketchCanvas.width, sketchCanvas.height);
+    });
+
+
+    toggleModeButton.addEventListener("click", () => {
+        isEraserMode = !isEraserMode;
+    
+        if (isEraserMode) {
+            ctx.strokeStyle = "white";  // Eraser mode
+            ctx.lineWidth = 20;  // Increase eraser size
+            toggleModeButton.textContent = "Switch to Pen";
+            toggleModeButton.classList.replace("btn-outline-primary", "btn-outline-danger");
+        } else {
+            ctx.strokeStyle = "black";  // Back to pen mode
+            ctx.lineWidth = 2;  // **Reset pen thickness**
+            toggleModeButton.textContent = "Switch to Eraser";
+            toggleModeButton.classList.replace("btn-outline-danger", "btn-outline-primary");
+        }
+    });
+
+
+
+
+
+
+
+    imageUpload.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+      
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          
+          blankImg.src = e.target.result;
+      
+          
+          const tempImg = new Image();
+          tempImg.onload = function () {
+            
+            if (blankImg) {
+                blankImg.style.width = `${tempImg.width}px`;
+                blankImg.style.height = `${tempImg.height}px`;
+            }
+
+            
+            if (uploadedImage) {
+                uploadedImage.src = "images/checkers.jpg";
+                uploadedImage.style.width = `${tempImg.width}px`;
+                uploadedImage.style.height = `${tempImg.height}px`;
+            }
+
+            globalWidth = tempImg.width;
+            globalHeight = tempImg.height;
+
+            const saveIconBox = document.getElementById("saveIconBox");
+            if (saveIconBox) {
+                saveIconBox.style.right = `calc(50% - ${tempImg.width / 2}px + 12px)`;
+            }
+    
+          };
+          tempImg.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    
+
+      
+      
+
+      // Aspect Ratio Options
+      const aspectRatios = {
+        "4:3": [
+            { value: "768x576", label: "Medium (768 x 576)" },
+            { value: "512x384", label: "Small (512 x 384)" },
+            { value: "1024x768", label: "Large (1024 x 768)" }
+        ],
+        "3:2": [
+            { value: "720x480", label: "Medium (720 x 480)" },
+            { value: "480x320", label: "Small (480 x 320)" },
+            { value: "896x592", label: "Large (896 x 592)" }
+        ],
+        "1:1": [
+            { value: "640x640", label: "Medium (640 x 640)" },
+            { value: "384x384", label: "Small (384 x 384)" },
+            { value: "832x832", label: "Large (832 x 832)" }
+        ],
+        "16:9": [
+            { value: "768x432", label: "Medium (768 x 432)" },
+            { value: "512x288", label: "Small (512 x 288)" },
+            { value: "1024x576", label: "Large (1024 x 576)" }
+        ],
+        "16:10": [
+            { value: "768x480", label: "Medium (768 x 480)" },
+            { value: "512x320", label: "Small (512 x 320)" },
+            { value: "1024x640", label: "Large (1024 x 640)" }
+        ]
+    };
+
+    // Populate canvas size dropdown based on aspect ratio
+    function updateCanvasSizeOptions() {
+        const selectedAspect = aspectRatioSelect.value;
+        dimensionsSelect.innerHTML = ""; 
+
+        aspectRatios[selectedAspect].forEach(option => {
+            const opt = document.createElement("option");
+            opt.value = option.value;
+            opt.textContent = option.value.replace("x", " x "); 
+            dimensionsSelect.appendChild(opt);
+        });
+
+        updateCanvasSize(); // Update canvas size
+    }
+
+    function updateCanvasSize() {
+        const [width, height] = dimensionsSelect.value.split("x").map(Number);
+        sketchCanvas.width = width;
+        sketchCanvas.height = height;
+        globalHeight = height;
+        globalWidth = width;
+        uploadedImage.width = width; // HTML attribute
+        uploadedImage.height = height; // HTML attribute
+        uploadedImage.style.width = `${width}px`; // Inline CSS
+        uploadedImage.style.height = `${height}px`; // Inline CSS
+        const saveIconBox = document.getElementById("saveIconBox");
+            if (saveIconBox) {
+                saveIconBox.style.right = `calc(50% - ${uploadedImage.width / 2}px + 12px)`;
+            }
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, sketchCanvas.width, sketchCanvas.height);
+    }
+    
+
+      // Set canvas background to white
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, sketchCanvas.width, sketchCanvas.height);
+
+      // Toggle between Sketch Mode and Upload Mode
+      function toggleInputMethod() {
+        uploadedImage.src = "images/checkers.jpg";
+        if (sketchMode.checked) {
+          uploadSection.style.display = "none";
+          sketchCanvas.style.display = "block";
+          aspectRatioAndDimensionsRow.style.display = "flex";
+          toggleModeContainer.style.display = "block";
+          blankImg.style.display = "none";
+          updateCanvasSize(); // Apply selected canvas size
+        } else {
+          uploadSection.style.display = "block";
+          sketchCanvas.style.display = "none";
+          aspectRatioAndDimensionsRow.style.display = "none";
+          toggleModeContainer.style.display = "none";
+          blankImg.style.display = "block";
+        }
+      }
+
+
+      aspectRatioSelect.addEventListener("change", updateCanvasSizeOptions);
+      dimensionsSelect.addEventListener("change", updateCanvasSize);
+      uploadMode.addEventListener("change", toggleInputMethod);
+      sketchMode.addEventListener("change", toggleInputMethod);
+
+      updateCanvasSizeOptions(); // Populate size options on load
+
+
+      // Event listeners for radio buttons
+      uploadMode.addEventListener("change", toggleInputMethod);
+      sketchMode.addEventListener("change", toggleInputMethod);
+
+
+    designBtn.addEventListener("click", async () => {
+        uploadedImage.src = "images/checkers.jpg";
+        
+        const prompt = document.getElementById("promptInput").value.trim();
+        imgPrompt = "Sketched: <br> " + prompt;
+        let originalBase64 = "";
+        
+
+        if(uploadMode.checked && !sketchMode.checked){
+
+            if (!blankImg.src) {
+                alert("Please upload an image first.");
+                return;
+              }
+          
+              console.log("Uploading image..." + blankImg.innerHTML);
+          
+            
+            document.getElementById("imageUpload").value = "";
+            
+              originalBase64 = blankImg.src.replace(/^data:image\/\w+;base64,/, '');
+              
+            
+              if(!originalBase64){
+                  console.log("Original image base64:", originalBase64);
+                  console.log(globalWidth, globalHeight);
+                  
+                  return;
+              }
+              console.log("Original image:", originalBase64);
+              console.log(globalWidth, globalHeight);
+              
+            
+            
+            
+              //const prompt = document.getElementById("promptInput").value.trim();
+              
+            
+        
+        }
+        else if(!uploadMode.checked && sketchMode.checked){
+            const canvasBase64 = sketchCanvas.toDataURL("image/png"); 
+            console.log(canvasBase64); // Logs the Base64 string
+
+            if (!canvasBase64) {
+                alert("Please upload an image first.");
+                return;
+              }
+
+              //const prompt = document.getElementById("promptInput").value.trim();
+              originalBase64 = canvasBase64.replace(/^data:image\/\w+;base64,/, '');
+              
+            
+
+
+        }
+
+        
+
+        const payload = {
+            "input_image": `data:image/png;base64,${originalBase64}`,
+            "prompt": prompt,
+            "negative_prompt": "",
+            "steps": 20,
+            "sampler_name": "DPM++ 2M",
+            "scheduler": "Automatic",
+            override_settings: { sd_model_checkpoint: "realisticVisionV60B1_v51HyperVAE.safetensors" },
+            "cfg_scale": 7,
+            "width": globalWidth,
+            "height": globalHeight,
+          
+            //"resize_mode": 0,
+
+          }
+
+
+        const progPercentage = document.querySelector('#progPercentage');
+                  const progressRing = document.querySelector('.progress-ring-circle');
+                  progPercentage.innerHTML = "";
+                  progressRing.style.strokeDashoffset = 188.4;
+            
+            
+              progContainer.classList.remove("d-none");
+              try {
+            
+                const progressPromise = trackProgress();
+                const response = await fetch(`https://a1a8-49-205-87-233.ngrok-free.app/scribble`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(payload),
+                  mode: "cors"
+                });
+                const data = await response.json();
+            
+                await progressPromise;
+                console.log("Response from API:", data);
+                
+                const base64Image = data.images[0];
+                generatedImage = base64Image;
+                document.getElementById("imageUpload").value = "";
+                
+                uploadedImage.src = `data:image/png;base64,${base64Image}`;
+                
+            
+                progContainer.classList.add("d-none");
+              } catch (err) {
+                console.error("Error:", err);
+              }
+    });
+      
+
+
+
+
+
+
+
+
+
+
+      sketchCanvas.addEventListener("mousedown", function (e) {
+        drawing = true;
+        ctx.beginPath();
+        ctx.moveTo(e.offsetX, e.offsetY);
+      });
+
+      sketchCanvas.addEventListener("mousemove", (e) => {
+        if (!drawing) return;
+    
+        ctx.lineWidth = isEraserMode ? 20 : 2; // Set thickness based on mode
+        ctx.strokeStyle = isEraserMode ? "white" : "black"; // Set stroke color
+    
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+    });
+
+      sketchCanvas.addEventListener("mouseup", function () {
+        drawing = false;
+      });
+
+      sketchCanvas.addEventListener("mouseleave", function () {
+        drawing = false;
+      });
+    });
+
+
+
+
+
+
+
+
+    async function trackProgress() {
+        const progPercentage = document.querySelector('#progPercentage');
+        const progressRing = document.querySelector('.progress-ring-circle');
+        const generatedImg = document.getElementById("generatedImg");
+    
+        let steps = 0;
+    
+        return new Promise((resolve) => {
+            const interval = setInterval(async () => {
+                try {
+                    console.log("Fetching progress...");
+    
+                    const response = await fetch(`https://a1a8-49-205-87-233.ngrok-free.app/progress`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "ngrok-skip-browser-warning": "true"
+                        },
+                        mode: "cors"
+                    });
+    
+                    const contentType = response.headers.get("content-type");
+                    if (!contentType || !contentType.includes("application/json")) {
+                        const rawText = await response.text();
+                        console.error("Unexpected Response (Not JSON):", rawText);
+                        throw new Error("Server did not return JSON");
+                    }
+    
+                    const progressData = await response.json();
+                    console.log("Progress Data:", progressData);
+    
+                    let progress = Math.round(progressData.progress * 100);
+                    let base64Image = progressData.current_image;
+                    if (base64Image) {
+                        generatedImg.src = `data:image/png;base64,${base64Image}`;
+                    }
+    
+                    progress = Math.max(0, Math.min(progress, 100));
+                    
+    
+                    let secs = Math.round(progressData.eta_relative);
+    
+                    const circumference = 188.4;
+                    const strokeOffset = circumference * (1 - progress / 100);
+                    progressRing.style.strokeDashoffset = strokeOffset;
+    
+                    progPercentage.innerHTML = `<span style='height:24px;'>${secs}</span><span id='sectxt' style='font-size: 9px; height:50%;'>secs</span>`;
+    
+                    if (progress >= 88 || (steps > 0 && progress == 0)) {
+                        progPercentage.innerHTML = "<span style='height:24px;'>0</span><span id='sectxt' style='font-size: 9px; height:50%;'>secs</span>";
+                        progressRing.style.strokeDashoffset = 0;  
+                        clearInterval(interval);
+                        resolve();
+                    }
+                    steps++;
+    
+                } catch (error) {
+                    console.error("Error tracking progress:", error);
+                    clearInterval(interval);
+                    resolve();
+                }
+            }, 2500);
+        });
+    }
+
+
+
+
+
+const saveButton = document.getElementById("saveIcon");
+if(window.location.pathname == "/sketch") {
+    if (saveButton) {
+        saveButton.addEventListener("click", async () => {
+            try {
+                saveLoader.play();
+                const urlAndID = await saveImageToCloudinary(generatedImage);
+                console.log('URL returned:', urlAndID.url);
+                console.log('Public ID returned:', urlAndID.public_id);
+    
+                if (window.location.pathname === "/sketch") {
+    
+                    const response = await fetch("/saveImg", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ prompt: imgPrompt, imageUrl: urlAndID.url, publicId: urlAndID.public_id }),
+                        mode: "cors"
+                    });
+    
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log("Image saved successfully:", data);
+                        saveLoader.stop();
+                        //alert("Image saved successfully!");
+                    } else {
+                        const errorData = await response.json();
+                        console.error("Error saving image:", errorData.error);
+                        alert("Error saving image!");
+                        saveLoader.stop();
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to upload image:', error);
+            }
+        });
+    }
+}
+
+async function saveImageToCloudinary(base64Image) {
+    try {
+      const response = await fetch('/upload-image', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ image: base64Image }),
+        mode: "cors"
+        
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to upload image');
+      }
+  
+      const data = await response.json();
+
+      return {
+        url: data.url,
+        public_id: data.public_id
+    };
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+}
+
+
+
+
+  </script> -->
+
+</body>
+</html>

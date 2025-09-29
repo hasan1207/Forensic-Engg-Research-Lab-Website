@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interior Design Generator</title>
+    <%- include("partials/headerFiles") %>
+</head>
+<body>
+    
+    <%- include("partials/navBar") %>
+    <div class="container-sm mt-5">
+       
+
+
+        <header class="text-center mb-5">
+            <h1 class="display-4">Interior Design Generator</h1>
+            <p class="text-muted">Create stunning interior designs with AI-powered generation.</p>
+        </header>
+
+
+        <section class="mb-5">
+            <h3 class="text-center mb-4">Design Inspirations</h3>
+            <div class="row" style="height: 312px !important;">
+                <div class="col-md-4" style="overflow: hidden;">
+                    <img src="/images/image (39).png" class="liv rounded shadow-sm" alt="Design Inspiration 1" style="object-fit: fill; width: 100%; height: 100%;">
+                </div>
+                <div class="col-md-4">
+                    <img src="/images/image (40).png" class="img-fluid rounded shadow-sm" alt="Design Inspiration 2">
+                </div>
+                <div class="col-md-4">
+                    <img src="/images/image (41).png" class="img-fluid rounded shadow-sm" alt="Design Inspiration 3">
+                </div>
+            </div>
+        </section>
+        <section class="bg-light p-4 rounded shadow-sm">
+            <h3 class="text-center">Generate Your Design</h3>
+            <section class="bg-light p-4 rounded shadow-sm">
+                <%- include("partials/modelStatus") %>
+            
+
+            <form id="promptForm">
+                <div class="container" style="padding-top: 10px !important;">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="mb-3">
+                                <label for="prompt" class="form-label">Describe Your Design:</label>
+                                <textarea class="form-control" id="prompt" name="prompt" rows="3" 
+                                placeholder="e.g., Modern living room with a minimalist style, light wood floors, and natural lighting." required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="samplingRate" class="form-label">Sampling Steps:</label>
+                            <input type="number" id="samplingRate" name="samplingRate" class="form-control" min="1" max="150" value="20" placeholder="20 or 50 recommended">
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="aspectRatio" class="form-label">Select Aspect Ratio:</label>
+                                <select class="form-select" id="aspectRatio" name="aspectRatio" required>
+                                    <option value="4:3">4:3</option>
+                                    <option value="3:2">3:2</option>
+                                    <option value="1:1">1:1</option>
+                                    <option value="16:9">16:9</option>
+                                    <option value="16:10">16:10</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="dimensions" class="form-label">Select Image Size:</label>
+                                <select class="form-select" id="dimensions" name="dimensions" required>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100" id="generateButton">Generate Design</button>
+            </form>
+            
+
+            
+        </section>
+        
+
+        
+        <section id="imageContainer" class="mt-5 mb-5 text-center position-relative">
+            <h4 class="mb-4">Your Generated Design</h4>
+            <p class="text-muted" id="loadingMessage">The generated image will appear here after processing.</p>
+        
+            <div id="generatedImage" --class="position-relative d-inline-block">
+                <img src="/images/checkers.jpg" id="generatedImg" alt="Generated Design" class="img-fluid rounded shadow-sm gen-img" style="width:768px; height: 576px; object-fit: cover;">
+
+                <%- include("partials/progressRing") %>
+                <%- include("partials/saveIcon") %>
+                
+            </div>
+        
+        </section>
+
+        
+    </div>
+    <%- include("partials/footer") %>
+    <%- include("partials/codeFiles") %>
+    
+    
+</body>
+</html>
