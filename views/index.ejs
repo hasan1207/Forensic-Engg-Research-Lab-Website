@@ -172,7 +172,7 @@ highly qualified forensic experts committed to delivering reliable and legally a
 
 
 
-<button type="button" class="btn btn-danger">Know More</button>
+<a href="/about"><button type="button" class="btn btn-danger">Know More</button></a>
 
 </div> </div> </div>
 
@@ -321,19 +321,21 @@ highly qualified forensic experts committed to delivering reliable and legally a
                         <img src="/images/founder.jpeg" alt="Founder" class="img-fluid">
                     </div>
                     <div class="founder-info">
+                        
                         <h5 class="fw-bold">Dr. Adarsh Kumar, CEng (I)</h5>
                         <p class="text-primary mb-1">Founder & CEO</p>
                         <p class="small text-muted">Forensic Engg Research Lab LLP</p>
-
+                        
                         <!-- Button to toggle the message -->
-                        <button class="btn btn-outline-primary mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#founderMessage" aria-expanded="false" aria-controls="founderMessage">
-                            Read Founder's Message
-                        </button>
+                        <!-- <button class="btn btn-outline-primary mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#founderMessage" aria-expanded="false" aria-controls="founderMessage">
+                            Founder's Message
+                        </button> -->
 
                         <!-- Hidden collapsible message -->
-                        <div class="collapse mt-3" id="founderMessage">
+                        <!-- <div class="collapse mt-3" id="founderMessage"> -->
+                        <div class="mt-3" id="founderMessage"></div>
                             <div>
-                                <p>
+                                <p id="founderMessageText">
                                     We are pleased to introduce Forensic Engg Research Lab LLP (FERL) as the first private
 multidisciplinary forensic science laboratory in Eastern and Central India, serving the states of
 Jharkhand, Bihar, West Bengal, Odhisha, Chhattisgarh, and adjoining regions, with specialized
@@ -378,7 +380,7 @@ science, structure, and society closer than ever before.
                         <img src="/images/FERL Upcoming Event.jpg" class="card-img-top event-img" 
                             alt="Event 1" data-bs-toggle="modal" data-bs-target="#event1Modal">
                         <div class="card-body">
-                            <h5 class="card-title">National Seminar on Forensic Science</h5>
+                            <h5 class="card-title">1st National Convention of Forensic Science at Ranchi</h5>
                             <p class="card-text">November/December 2025
                             </p>
                         </div>
@@ -392,13 +394,37 @@ science, structure, and society closer than ever before.
         </section>
 
         <!-- Full Image Modal -->
-        <div class="modal fade" id="event1Modal" tabindex="-1" aria-hidden="true">
+        <!-- <div class="modal fade" id="event1Modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content bg-transparent border-0">
             <img src="/images/FERL Upcoming Event.jpg" class="img-fluid rounded" alt="Event 1">
             </div>
         </div>
-        </div>
+        </div> -->
+
+        <div class="modal fade" id="event1Modal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-transparent border-0 position-relative">
+                
+                <!-- Preview (image for flyer/poster) -->
+                <img src="/images/FERL Upcoming Event.jpg" class="img-fluid rounded" alt="Event 1">
+
+                <!-- Download button (top-right corner) -->
+                <a href="/files/FERL Upcoming Event.pdf" download
+                    class="btn btn-light btn-sm position-absolute top-0 end-0 m-3 d-flex align-items-center shadow-sm">
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true" focusable="false">
+                    <path d="M12 3v14"></path>
+                    <path d="M19 10l-7 7-7-7"></path>
+                    <path d="M5 21h14"></path>
+                    </svg>
+                    
+                </a>
+                </div>
+            </div>
+            </div>
 
 
     <section id="head-office" class="bg-light py-5">
@@ -429,7 +455,7 @@ science, structure, and society closer than ever before.
                 
             </div>
             <div class="col-md-6 justify-content-center d-flex">
-                <img id="ranchiImg" src="/images/india-ranchi-Photoroom.png" alt="">
+                <img id="ranchiImg" src="/images/5036867.png" alt="">
 
             </div>
         </div>

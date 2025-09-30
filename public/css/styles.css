@@ -269,9 +269,17 @@ h1, h2, h3, h4, h5, h6 {
     object-fit: cover;
 }
 
+#upcoming-events .card-title, #upcoming-events .card-text{
+    text-align: center;
+}
+
 .founder-info {
     padding: 1.5rem;
     text-align: center;
+}
+
+#founderMessageText{
+    text-align: justify;
 }
 
 .founder-info h5 {
@@ -768,7 +776,7 @@ section {
 }
 
 #ranchiImg{
-    width: 400px;
+    width: 450px;
     height: auto;
 }
 
@@ -1256,3 +1264,12 @@ section {
                 grid-template-columns: 1fr;
             }
         }
+
+
+.footer-info{
+    text-align: left !important;
+}
+
+/* #founderMessage p{
+    text-align: justify !important;
+} */
