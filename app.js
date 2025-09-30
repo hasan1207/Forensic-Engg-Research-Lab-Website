@@ -41,7 +41,7 @@ app.use(express.urlencoded({ extended: true }));
 
   app.get("/", (req, res) => {
 
-    res.render("index", { user: req.user, page: null });
+    res.render("index");
   });
 
   
@@ -69,7 +69,14 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/about", (req, res) => {
 
 
-  res.render("about", { user: req.user, page: 'about' });
+  res.render("about");
+    
+});
+
+app.get("/services", (req, res) => {
+
+
+  res.render("services");
     
 });
 
