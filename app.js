@@ -5,13 +5,10 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
 
 
-
-const mongoURL = process.env.MONGODB_URL;
 const PORT = 3000;
 
 
@@ -28,15 +25,6 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-
-// mongoose
-//   .connect(mongoURL)
-//   .then(() => {
-//     console.log("Connected to MongoDB");
-//   })
-//   .catch((error) => {
-//     console.error("Error connecting to MongoDB:", error);
-//   });
 
 
   app.get("/", (req, res) => {
