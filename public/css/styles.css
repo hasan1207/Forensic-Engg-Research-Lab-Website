@@ -780,6 +780,10 @@ section {
     height: auto;
 }
 
+.card-title{
+    font-family: "Inter", sans-serif;
+}
+
   .info-bar > .right{
     padding-right: 40px;
   }
@@ -792,6 +796,31 @@ section {
     gap: 8px;
   }
 
+}
+
+/* @media (min-width: 450px) {
+    #line {
+        display: inline-block;
+    }
+
+    #envelope {
+        display: none;
+    }
+}
+
+@media (max-width: 450px) {
+    #line {
+        display: none;
+    }
+
+    #envelope {
+        display: inline-block;
+    }
+} */
+
+
+.accordion-item span{
+    font-family: 'Inter', sans-serif;
 }
 
 @media (max-width: 550px) {
